@@ -35,6 +35,12 @@ public class tablaPersonasController {
     /** El btn modificar. */
     @FXML
     private Button btnModificar;
+    
+    @FXML
+    private Button btnExportar;
+
+    @FXML
+    private Button btnImportar;
 
     /** El id tabla apellido. */
     @FXML
@@ -147,6 +153,22 @@ public class tablaPersonasController {
         	al.setContentText("No hay nadie seleccionado, asi que no se puede seleccionar nadie");
         	al.showAndWait();
     	}
+    }
+    
+    @FXML
+    void accionFiltrar(ActionEvent event) {
+    	//entra al pulsar el ENTER
+    }
+    
+
+    @FXML
+    void exportarCSV(ActionEvent event) {
+
+    }
+
+    @FXML
+    void importarCSV(ActionEvent event) {
+
     }
     
     /**

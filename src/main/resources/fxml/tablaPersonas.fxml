@@ -11,10 +11,20 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aketzagonzalez.aeropuertosF.tablaPersonasController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="700.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="700.0" spacing="10.0">
          <children>
             <Label text="Filtar por nombre:" />
-            <TextField fx:id="txtFiltro" />
+            <TextField fx:id="txtFiltro" onAction="#accionFiltrar" />
+            <Button fx:id="btnImportar" mnemonicParsing="false" onAction="#importarCSV" text="Importar">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnExportar" mnemonicParsing="false" onAction="#exportarCSV" text="Exportar">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
       <TableView fx:id="tablaPersonas" prefWidth="700.0">
