@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aketzagonzalez.aeropuertosF.tablaPersonasController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="700.0">
+         <children>
+            <Label text="Filtar por nombre:" />
+            <TextField fx:id="txtFiltro" />
+         </children>
+      </HBox>
+      <TableView fx:id="tablaPersonas" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="idTablaNombre" editable="false" prefWidth="340.7999938726425" text="Nombre" />
+            <TableColumn fx:id="idTablaApellido" editable="false" minWidth="0.0" prefWidth="198.39999389648438" text="Apellidos" />
+            <TableColumn fx:id="idTablaEdad" editable="false" minWidth="0.0" prefWidth="162.4000244140625" text="Edad" />
+         </columns>
+      </TableView>
+      <HBox alignment="CENTER" prefHeight="41.0" prefWidth="700.0" spacing="30.0">
+         <children>
+            <Button fx:id="btnAniadir" mnemonicParsing="false" onAction="#aniadirPersona" text="Agregar Persona" />
+            <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarPersona" text="Modificar Persona" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar Persona" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

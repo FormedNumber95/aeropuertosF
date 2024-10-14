@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aketzagonzalez.aeropuertosF.aniadirPersonaController">
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="40.0">
+         <children>
+            <Label text="Nombre" />
+            <TextField fx:id="txtNombre" prefWidth="274.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="35.0">
+         <children>
+            <Label text="Apellidos" />
+            <TextField fx:id="txtApellidos" prefWidth="273.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="60.0">
+         <children>
+            <Label text="Edad" />
+            <TextField fx:id="txtEdad" prefWidth="66.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="50.0">
+         <children>
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#accionAniadir" text="Guardar" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#accionCancelar" text="Cancelar" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+   </padding>
+</VBox>
