@@ -71,7 +71,7 @@ public class aniadirPersonaController {
 	    	}
     	}
     	Persona p=new Persona(nombre, apellidos, edad);
-    	for(Persona per:tablaPersonas.getItems()){
+    	for(Persona per:tablaPersonasController.getListaTodas()){
     		if(per.equals(p)) {
     			existe=true;
     		}
@@ -80,7 +80,7 @@ public class aniadirPersonaController {
 	    	Alert al=new Alert(AlertType.INFORMATION);
 	    	al.setHeaderText(null);
 	    	if(error.equals("")&&!existe) {
-	    		tablaPersonas.getItems().add(p);
+	    		tablaPersonasController.getListaTodas().add(p);
 	    		tablaPersonas.refresh();
 	    		al.setContentText("Persona añadida correctamente");
 	    	}else {

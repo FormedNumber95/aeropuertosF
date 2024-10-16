@@ -60,13 +60,13 @@ public class tablaPersonasController {
 
     /** El tabla personas. */
     @FXML
-    private TableView<Persona> tablaPersonas=new TableView<Persona>();
+    private TableView<Persona> tablaPersonas=new TableView<Persona>(listaTodas);
     
     /** El texto del filtro. */
     @FXML
     private TextField txtFiltro;
     
-    private ObservableList<Persona> listaTodas;
+    private static ObservableList<Persona> listaTodas;
     
     private FilteredList<Persona> filtro;
     
@@ -97,7 +97,6 @@ public class tablaPersonasController {
         s.initOwner(MainApp.getStage());
         s.initModality(javafx.stage.Modality.WINDOW_MODAL);
         s.show();
-        listaTodas=tablaPersonas.getItems();
     }
     
     /**
@@ -194,7 +193,8 @@ public class tablaPersonasController {
     	idTablaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     	idTablaApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
     	idTablaEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
-    	filtro = new FilteredList<Persona>(tablaPersonas.getItems(),null);
+    	listaTodas=tablaPersonas.getItems();
+    	filtro = new FilteredList<Persona>(listaTodas);
     }
 
 	/**
@@ -204,6 +204,10 @@ public class tablaPersonasController {
 	 */
 	public static Stage getS() {
 		return s;
+	}
+	
+	public static ObservableList<Persona> getListaTodas() {
+		return listaTodas;
 	}
 
 	/**
