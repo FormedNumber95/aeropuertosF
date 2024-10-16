@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Built-By: dm2
-Build-Jdk: 21.0.4
+Build-Jdk: 23
 Main-Class: es.aketzagonzalez.aeropuertosF.MainApp
 Created-By: Maven Integration for Eclipse
 

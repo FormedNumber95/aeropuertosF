@@ -2,6 +2,8 @@ package es.aketzagonzalez.aeropuertosF;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,9 +38,11 @@ public class tablaPersonasController {
     @FXML
     private Button btnModificar;
     
+    /** El btn exportar. */
     @FXML
     private Button btnExportar;
 
+    /** El btn importar. */
     @FXML
     private Button btnImportar;
 
@@ -58,8 +62,13 @@ public class tablaPersonasController {
     @FXML
     private TableView<Persona> tablaPersonas=new TableView<Persona>();
     
+    /** El texto del filtro. */
     @FXML
     private TextField txtFiltro;
+    
+    private ObservableList<Persona> listaTodas;
+    
+    private FilteredList<Persona> filtro;
     
     /** Identificador de si añade o modifica la persona. */
     private static boolean esAniadir=false;
@@ -88,6 +97,7 @@ public class tablaPersonasController {
         s.initOwner(MainApp.getStage());
         s.initModality(javafx.stage.Modality.WINDOW_MODAL);
         s.show();
+        listaTodas=tablaPersonas.getItems();
     }
     
     /**
@@ -157,7 +167,12 @@ public class tablaPersonasController {
     
     @FXML
     void accionFiltrar(ActionEvent event) {
-    	//entra al pulsar el ENTER
+    	tablaPersonas.setItems(filtro);
+    	if(txtFiltro.getText().isEmpty()){
+    		tablaPersonas.setItems(listaTodas);
+    	}else {
+    		filtro.setPredicate(persona -> persona.getNombre().contains(txtFiltro.getText()));
+    	}
     }
     
 
@@ -179,6 +194,7 @@ public class tablaPersonasController {
     	idTablaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     	idTablaApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
     	idTablaEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
+    	filtro = new FilteredList<Persona>(tablaPersonas.getItems(),null);
     }
 
 	/**
