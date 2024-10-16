@@ -1,5 +1,11 @@
 package es.aketzagonzalez.aeropuertosF;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javafx.collections.ObservableList;
@@ -15,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Persona;
 
@@ -66,8 +74,10 @@ public class tablaPersonasController {
     @FXML
     private TextField txtFiltro;
     
+    /** La lista de todas las personas. */
     private static ObservableList<Persona> listaTodas;
     
+    /** El filtro. */
     private FilteredList<Persona> filtro;
     
     /** Identificador de si añade o modifica la persona. */
@@ -164,6 +174,11 @@ public class tablaPersonasController {
     	}
     }
     
+    /**
+     * Filtra en la lista para que solo se vean aquellas personas que su nombre contenga el texto introducido.
+     *
+     * @param event the event
+     */
     @FXML
     void accionFiltrar(ActionEvent event) {
     	tablaPersonas.setItems(filtro);
@@ -175,15 +190,63 @@ public class tablaPersonasController {
     }
     
 
+    /**
+     * Exportar a CSV la tabla actual (todas las personas, no solo las filtradas).
+     *
+     * @param event the event
+     */
     @FXML
     void exportarCSV(ActionEvent event) {
-
+    	FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar Archivo CSV");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Archivos CSV (*.csv)", "*.csv"));
+        File archivo = fileChooser.showSaveDialog(MainApp.getStage());
+        if(archivo!=null) {
+        	try(BufferedWriter br=new BufferedWriter(new FileWriter(archivo))){
+        		br.write("Nombre,Apellidos,Edad");
+        		br.newLine();
+        		for(Persona p:listaTodas) {
+        			br.write(p.getNombre()+","+p.getApellidos()+","+p.getEdad());
+        			br.newLine();
+        		}
+        	} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
     }
 
+    /**
+     * Importar desde CSV las personas para asignar a la tabla las personas del CSV.
+     *
+     * @param event the event
+     */
     @FXML
     void importarCSV(ActionEvent event) {
-
-    }
+    	listaTodas.clear();
+    	FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Abrir Archivo CSV");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Archivos CSV (*.csv)", "*.csv"));
+        File archivo = fileChooser.showOpenDialog(MainApp.getStage());
+        if(archivo!=null) {
+        	try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+        		String linea=br.readLine();
+        			if(linea!=null) {
+        				linea=br.readLine();
+        			}
+        			while(linea!=null) {
+        				String[]leido=linea.split(",");
+        				Persona p=new Persona(leido[0], leido[1], Integer.parseInt(leido[2]));
+        				listaTodas.add(p);
+        				linea=br.readLine();
+        			}
+        			tablaPersonas.refresh();
+        		} catch (FileNotFoundException e) {
+        			e.printStackTrace();
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
+       }
+  }
     
     /**
      * Inicializa el valor de las celdas.
@@ -206,6 +269,11 @@ public class tablaPersonasController {
 		return s;
 	}
 	
+	/**
+	 * Getter de listaTodas.
+	 *
+	 * @return la lista de todas las persoans
+	 */
 	public static ObservableList<Persona> getListaTodas() {
 		return listaTodas;
 	}
